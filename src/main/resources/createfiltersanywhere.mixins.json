@@ -1,0 +1,41 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "xyz.iwolfking.createfiltersanywhere.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "createfiltersanywhere.refmap.json",
+  "mixins": [
+    "compat.ae2.MixinFuzzyPriorityList",
+    "compat.ae2.MixinPrecisePriorityList",
+    "compat.ae2.MixinStorageExportStrategy",
+    "compat.laserio.MixinBaseCardCache",
+    "compat.modularrouters.MixinBulkItemMatcher",
+    "compat.modularrouters.MixinContainerModule",
+    "compat.modularrouters.MixinItemStackHashingStrategy",
+    "compat.modularrouters.MixinSimpleItemMatcher",
+    "compat.refinedstorage.MixinComparer",
+    "compat.refinedstorage.MixinExporterNode",
+    "compat.refinedstorage.MixinFilterGridFilter",
+    "compat.refinedstorage.MixinItemExternalStorage",
+    "compat.refinedstorage.MixinItemStorageDisk",
+    "compat.refinedstorage.MixinIWhiteListBlacklist",
+    "compat.sophisticatedcore.MixinSophItemMatcher",
+    "compat.tomsstorage.MixinSimpleItemFilter",
+    "compat.vanilla.MixinAllayEntity",
+    "create.AttributeFilterMenuAccessor",
+    "create.FilterItemInvoker",
+    "create.MixinAllItemAttributeLegacyDeserializers",
+    "create.MixinCreateFilteringBehaviour",
+    "create.MixinFilterMenu",
+    "create.MixinFilterScreenPacket",
+    "create.MixinListFilterItemStack"
+  ],
+  "client": [
+    "create.MixinAttributeFilterScreen",
+    "create.MixinClientFilterItem",
+    "create.MixinFilterScreen"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
