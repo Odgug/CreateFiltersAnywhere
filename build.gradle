@@ -156,6 +156,7 @@ dependencies {
     implementation fg.deobf("curse.maven:laserio-626839:5074767")
     implementation fg.deobf("curse.maven:guideme-1173950:6175343")
     implementation fg.deobf("curse.maven:refined-storage-243076:4844585")
+    implementation fg.deobf("curse.maven:botania-225643:6366547")
     implementation 'me.fallenbreath:conditional-mixin-forge:0.6.4'
 
     implementation(jarJar("me.fallenbreath:conditional-mixin-forge:0.6.4")) {
