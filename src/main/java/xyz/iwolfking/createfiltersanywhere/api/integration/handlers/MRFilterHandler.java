@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class MRFilterHandler {
 
-    public static final ModuleFlags DEFAULT_FLAGS =  new ModuleFlags(true, true, false, false, false);
+    public static final ModuleFlags DEFAULT_FLAGS =  new ModuleFlags(false, true, false, false, false);
 
     public static boolean isSupportedFilterItem(ItemStack filterStack) {
         return filterStack.getItem() instanceof SmartFilterItem;
@@ -17,7 +17,7 @@ public class MRFilterHandler {
 
     public static boolean checkFilter(ItemStack stack, ItemStack filterStack) {
         if(filterStack.getItem() instanceof SmartFilterItem smartFilterItem) {
-            IItemMatcher matcher = smartFilterItem.compile(stack, filterStack);
+            IItemMatcher matcher = smartFilterItem.compile(filterStack, stack);
             return matcher.matchItem(stack, DEFAULT_FLAGS);
         }
 

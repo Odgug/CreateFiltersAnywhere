@@ -11,6 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import xyz.iwolfking.createfiltersanywhere.Config;
+import xyz.iwolfking.createfiltersanywhere.api.core.CFAFilterSelector;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFATests;
 
 
@@ -22,8 +23,8 @@ public class MixinSimpleItemMatcher {
 
     @Inject(method = "matchItem", at = @At("HEAD"), cancellable = true)
     public void createFilterMatcher(ItemStack stack, IModuleFlags flags, CallbackInfoReturnable<Boolean> cir) {
-        if (Config.MR_COMPAT.get() && filterStack.getItem() instanceof FilterItem) {
-            cir.setReturnValue(CFATests.checkFilter(stack, this.filterStack,true,null));
+        if (Config.MR_COMPAT.get() && CFAFilterSelector.isSupportedFilterStack(filterStack)) {
+            cir.setReturnValue(CFAFilterSelector.doFilterTest(stack, this.filterStack));
         }
     }
 }

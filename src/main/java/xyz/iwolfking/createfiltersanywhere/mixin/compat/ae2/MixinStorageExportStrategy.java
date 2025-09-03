@@ -21,6 +21,7 @@ import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import xyz.iwolfking.createfiltersanywhere.Config;
 import xyz.iwolfking.createfiltersanywhere.api.compat.AE2KeyHandler;
+import xyz.iwolfking.createfiltersanywhere.api.core.CFAFilterSelector;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFATests;
 
 
@@ -45,7 +46,7 @@ public abstract class MixinStorageExportStrategy<T, S> implements StackExportStr
                 return 0L;
             } else {
                 IStorageService inv = context.getInternalStorage();
-                if (what instanceof AEItemKey itemKey && Config.AE2_COMPAT.get() && itemKey.getItem() instanceof FilterItem) {
+                if (what instanceof AEItemKey itemKey && Config.AE2_COMPAT.get() && CFAFilterSelector.isSupportedFilterStack(itemKey.toStack())) {
                     for (Object2LongMap.Entry<AEKey> key : inv.getInventory().getAvailableStacks()) {
                         AEKey aek = key.getKey();
                         if (!(aek instanceof AEItemKey itemKey2)) {

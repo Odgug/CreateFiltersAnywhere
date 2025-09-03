@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import xyz.iwolfking.createfiltersanywhere.api.core.CFAFilterSelector;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFATests;
 
 @Mixin(value = Allay.class)
@@ -18,8 +19,8 @@ public class MixinAllayEntity {
 
     @Inject(method = "allayConsidersItemEqual", at = @At("HEAD"), cancellable = true)
     private void allayConsidersCreateFiltersDifferently(ItemStack first, ItemStack second, CallbackInfoReturnable<Boolean> cir) {
-        if(first.getItem() instanceof FilterItem) {
-            cir.setReturnValue(CFATests.checkFilter(second, first, true, null));
+        if(CFAFilterSelector.isSupportedFilterStack(first)) {
+            cir.setReturnValue(CFAFilterSelector.doFilterTest(second, first));
         }
     }
 }

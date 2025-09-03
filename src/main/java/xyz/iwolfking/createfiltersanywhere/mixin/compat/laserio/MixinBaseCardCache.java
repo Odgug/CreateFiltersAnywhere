@@ -14,6 +14,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import xyz.iwolfking.createfiltersanywhere.Config;
+import xyz.iwolfking.createfiltersanywhere.api.core.CFAFilterSelector;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFATests;
 
 import java.util.List;
@@ -52,8 +53,8 @@ public class MixinBaseCardCache {
             }
 
             for(ItemStack stack : this.filteredItems) {
-                if(stack.getItem() instanceof FilterItem) {
-                    if(CFATests.checkFilter(key.getStack(), stack, true, null)) {
+                if(CFAFilterSelector.isSupportedFilterStack(stack)) {
+                    if(CFAFilterSelector.doFilterTest(key.getStack(), stack)) {
                         this.filterCache.put(key, this.isAllowList);
                         cir.setReturnValue(this.isAllowList);
                     }

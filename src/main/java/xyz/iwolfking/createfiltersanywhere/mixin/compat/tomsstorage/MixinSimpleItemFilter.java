@@ -8,6 +8,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import xyz.iwolfking.createfiltersanywhere.Config;
+import xyz.iwolfking.createfiltersanywhere.api.core.CFAFilterSelector;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFATests;
 
 
@@ -15,8 +17,8 @@ import xyz.iwolfking.createfiltersanywhere.api.core.CFATests;
 public class MixinSimpleItemFilter {
     @Redirect(method = "test0", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;isSameItem(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;)Z"))
     private boolean checkCreateFilterNormal(ItemStack stack, ItemStack other) {
-        if(other.getItem() instanceof FilterItem) {
-            return CFATests.checkFilter(stack, other, true, null);
+        if (Config.TOMS_COMPAT.get() && CFAFilterSelector.isSupportedFilterStack(other)) {
+            return CFAFilterSelector.doFilterTest(stack, other);
         }
 
         return ItemStack.isSameItem(stack, other);

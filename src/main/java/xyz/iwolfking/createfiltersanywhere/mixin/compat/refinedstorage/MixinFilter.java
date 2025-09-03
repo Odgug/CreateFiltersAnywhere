@@ -18,6 +18,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import xyz.iwolfking.createfiltersanywhere.Config;
+import xyz.iwolfking.createfiltersanywhere.api.core.CFAFilterSelector;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFATests;
 
 import java.util.Set;
@@ -33,17 +35,21 @@ public class MixinFilter {
 
     @Inject(method = "isAllowed", at = @At("HEAD"), cancellable = true)
     private void checkCreateFilter(ResourceKey resource, CallbackInfoReturnable<Boolean> cir) {
+        if (!Config.RS_COMPAT.get()) {
+            return;
+
+        }
         final ResourceKey normalized = normalizer.apply(resource);
         if(normalized instanceof ItemResource normalizedItem) {
             for(ResourceKey filter : filters) {
                 if(filter instanceof ItemResource itemResource) {
-                    if(itemResource.item() instanceof FilterItem) {
+                    if(CFAFilterSelector.isSupportedFilterStack(itemResource.toItemStack())) {
                         if(mode.equals(FilterMode.ALLOW)) {
-                            cir.setReturnValue(CFATests.checkFilter(normalizedItem.toItemStack(), itemResource.toItemStack(), true, null));
+                            cir.setReturnValue(CFAFilterSelector.doFilterTest(normalizedItem.toItemStack(), itemResource.toItemStack()));
                             return;
                         }
                         else {
-                            cir.setReturnValue(!CFATests.checkFilter(normalizedItem.toItemStack(), itemResource.toItemStack(), true, null));
+                            cir.setReturnValue(!CFAFilterSelector.doFilterTest(normalizedItem.toItemStack(), itemResource.toItemStack()));
                             return;
                         }
                     }

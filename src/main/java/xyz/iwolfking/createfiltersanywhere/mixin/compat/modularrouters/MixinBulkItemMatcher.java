@@ -10,6 +10,8 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import xyz.iwolfking.createfiltersanywhere.Config;
+import xyz.iwolfking.createfiltersanywhere.api.core.CFAFilterSelector;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFATests;
 
 @Mixin(value = BulkItemMatcher.class, remap = false)
@@ -20,10 +22,18 @@ public class MixinBulkItemMatcher {
 
     @Inject(method = "matchItem", at = @At("HEAD"), cancellable = true)
     public void createItemMatcher(ItemStack stack, IModuleFlags flags, CallbackInfoReturnable<Boolean> cir) {
+        if(!Config.MR_COMPAT.get()) {
+            return;
+        }
+
+
         for (ItemStack filter : this.stacks) {
-            if (CFATests.checkFilter(stack, filter,true,null)) {
-                cir.setReturnValue(true);
-                return;
+            if(CFAFilterSelector.isSupportedFilterStack(filter))
+            {
+                if (CFAFilterSelector.doFilterTest(stack, filter)) {
+                    cir.setReturnValue(true);
+                    return;
+                }
             }
         }
     }
