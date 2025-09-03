@@ -45,7 +45,7 @@ public class CreateFiltersAnywhere {
         modEventBus.addListener(this::registerAttributes);
         NeoForge.EVENT_BUS.register(this);
 
-        NeoForge.EVENT_BUS.register(CFACache.class);
+        //NeoForge.EVENT_BUS.register(CFACache.class);
         NeoForge.EVENT_BUS.register(CFATests.class);
 
         CFAComponents.register(modEventBus);
@@ -78,10 +78,10 @@ public class CreateFiltersAnywhere {
     public void onServerStarting(ServerStartingEvent event) {
     }
 
-    @SubscribeEvent
-    public void onServerStopped(ServerStoppedEvent event) {
-        CFAAsync.shutdownAsync();
-    }
+//    @SubscribeEvent
+//    public void onServerStopped(ServerStoppedEvent event) {
+//        CFAAsync.shutdownAsync();
+//    }
 
     @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {
