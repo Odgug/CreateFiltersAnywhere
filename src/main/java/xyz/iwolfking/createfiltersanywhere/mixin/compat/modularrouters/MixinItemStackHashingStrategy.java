@@ -1,7 +1,6 @@
 package xyz.iwolfking.createfiltersanywhere.mixin.compat.modularrouters;
 
 
-import com.simibubi.create.content.logistics.filter.FilterItem;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

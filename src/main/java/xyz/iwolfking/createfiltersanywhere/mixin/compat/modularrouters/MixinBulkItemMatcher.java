@@ -12,7 +12,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import xyz.iwolfking.createfiltersanywhere.Config;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFAFilterSelector;
-import xyz.iwolfking.createfiltersanywhere.api.core.CFATests;
 
 @Mixin(value = BulkItemMatcher.class, remap = false)
 public class MixinBulkItemMatcher {

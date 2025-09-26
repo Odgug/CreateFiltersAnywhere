@@ -39,13 +39,14 @@ public class CreateFiltersAnywhere {
     //Checking if certain mods are loaded:
     public static boolean isCreateLoaded = false;
     public static boolean isFTBFilterSystemLoaded = false;
+    public static boolean isModularRoutersLoaded = false;
+    public static boolean isTomsStorageLoaded = false;
 
     public CreateFiltersAnywhere(IEventBus modEventBus, ModContainer modContainer) {
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::registerAttributes);
         NeoForge.EVENT_BUS.register(this);
 
-        //NeoForge.EVENT_BUS.register(CFACache.class);
         NeoForge.EVENT_BUS.register(CFATests.class);
 
         CFAComponents.register(modEventBus);
@@ -72,16 +73,14 @@ public class CreateFiltersAnywhere {
     private void commonSetup(final FMLCommonSetupEvent event) {
         isCreateLoaded = LoadingModList.get().getModFileById("create") != null;
         isFTBFilterSystemLoaded = LoadingModList.get().getModFileById("ftbfiltersystem") != null;
+        isModularRoutersLoaded = LoadingModList.get().getModFileById("modularrouters") != null;
+        isTomsStorageLoaded = LoadingModList.get().getModFileById("toms_storage") != null;
     }
 
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
     }
 
-//    @SubscribeEvent
-//    public void onServerStopped(ServerStoppedEvent event) {
-//        CFAAsync.shutdownAsync();
-//    }
 
     @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents {

@@ -1,7 +1,5 @@
 package xyz.iwolfking.createfiltersanywhere.mixin.compat.tomsstorage;
 
-import com.simibubi.create.content.logistics.filter.FilterItem;
-import com.tom.storagemod.inventory.StoredItemStack;
 import com.tom.storagemod.inventory.filter.SimpleItemFilter;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -10,7 +8,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import xyz.iwolfking.createfiltersanywhere.Config;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFAFilterSelector;
-import xyz.iwolfking.createfiltersanywhere.api.core.CFATests;
 
 
 @Mixin(value = SimpleItemFilter.class, remap = false)
