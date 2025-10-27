@@ -11,7 +11,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import xyz.iwolfking.createfiltersanywhere.api.core.CFAFilterSelector;
-import xyz.iwolfking.createfiltersanywhere.api.core.CFATests;
 
 
 @Mixin(value = FilteringBehaviour.class, remap = false)
@@ -28,7 +27,9 @@ public abstract class MixinCreateFilteringBehaviour extends BlockEntityBehaviour
 
     @Inject(method = "test(Lnet/minecraft/world/item/ItemStack;)Z", at = @At("HEAD"), cancellable = true)
     public void checkFilter(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
-        cir.setReturnValue(!isActive() || this.getFilter().isEmpty() || (CFAFilterSelector.isSupportedFilterStack(filter.item()) && CFAFilterSelector.doFilterTest(stack, this.getFilter())));
+        if(isActive() && !this.getFilter().isEmpty() && CFAFilterSelector.isSupportedFilterStack(filter.item())) {
+            cir.setReturnValue(CFAFilterSelector.doFilterTest(stack, this.getFilter()));
+        }
     }
 
     @Shadow
