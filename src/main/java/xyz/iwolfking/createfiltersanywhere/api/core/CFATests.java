@@ -53,7 +53,7 @@ public class CFATests {
             else if(LoadingModList.get().getModFileById("ae2") != null) {
                 return AE2KeyHandler.handleAEKey(stack, filterStack, level);
             }
-            CreateFiltersAnywhere.LOGGER.debug("[6.0.1] invalid filter entered");
+            CreateFiltersAnywhere.LOGGER.debug("[6.0.7] invalid filter entered");
             return false;
         }
         else {
