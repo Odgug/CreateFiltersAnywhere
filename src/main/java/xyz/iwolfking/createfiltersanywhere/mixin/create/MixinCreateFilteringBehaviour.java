@@ -1,5 +1,6 @@
 package xyz.iwolfking.createfiltersanywhere.mixin.create;
 
+import com.simibubi.create.content.logistics.filter.FilterItem;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.filtering.FilteringBehaviour;
@@ -29,7 +30,9 @@ public abstract class MixinCreateFilteringBehaviour extends BlockEntityBehaviour
 
     @Inject(method = "test(Lnet/minecraft/world/item/ItemStack;)Z", at = @At("HEAD"), cancellable = true)
     public void checkFilter(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
-        cir.setReturnValue(!isActive() || this.getFilter().isEmpty() || CFATests.checkFilter(stack, this.getFilter(), true, this.blockEntity.getLevel()));
+        if(stack.getItem() instanceof FilterItem) {
+            cir.setReturnValue(!isActive() || this.getFilter().isEmpty() || CFATests.checkFilter(stack, this.getFilter(), true, this.blockEntity.getLevel()));
+        }
     }
 
     @Shadow

@@ -146,8 +146,8 @@ dependencies {
     // If the group id is "net.minecraft" and the artifact id is one of ["client", "server", "joined"],
     // then special handling is done to allow a setup of a vanilla dependency without the use of an external repository.
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-    implementation fg.deobf("curse.maven:create-328085:6323270")
-    implementation "net.createmod.ponder:Ponder-Forge-${minecraft_version}:1.0.39"
+    implementation fg.deobf("curse.maven:create-328085:7149905")
+    implementation "net.createmod.ponder:Ponder-Forge-${minecraft_version}:1.0.63"
     implementation fg.deobf("curse.maven:sophisticated-backpacks-422301:6303388")
     implementation fg.deobf("curse.maven:sophisticated-core-618298:6317048")
     implementation fg.deobf("curse.maven:applied-energistics-2-223794:6091401")
@@ -156,7 +156,7 @@ dependencies {
     implementation fg.deobf("curse.maven:laserio-626839:5074767")
     implementation fg.deobf("curse.maven:guideme-1173950:6175343")
     implementation fg.deobf("curse.maven:refined-storage-243076:4844585")
-    implementation fg.deobf("curse.maven:botania-225643:6366547")
+    compileOnly fg.deobf("curse.maven:botania-225643:6366547")
     implementation 'me.fallenbreath:conditional-mixin-forge:0.6.4'
 
     implementation(jarJar("me.fallenbreath:conditional-mixin-forge:0.6.4")) {
